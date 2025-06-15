@@ -39,6 +39,67 @@ function doOperation () {
 
 // doOperation(0)
 
-const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json");
-console.log('Masih Jalan Nih')
-console.log(fetchPromise);
+// const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json");
+// console.log('Masih Jalan Nih')
+// console.log(fetchPromise);
+
+/**
+ * Bahwa promise tidak akan block main thread
+ * immediately return Promise object
+ * dan akan memanggil then() ketika data sudah tersedia
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+ */
+
+// const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+// fetchPromise
+//   .then(response => response.json())
+//   .then(data => {
+//     // data only available after the promise is resolved
+//     response = data
+//   })
+
+// console.log(fetchPromise)
+
+
+/**
+ * Try error handling
+ */
+
+// const fetchPromise2 = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/not-found");
+// fetchPromise2
+//   .then(response => {
+//     console.log(response)
+//     if (!response.ok) {
+//       throw new Error('Network response was not ok');
+//     }
+//     return response.json();
+//   })
+//   .then(data => {
+//     console.log(data);
+//   })
+//   .catch(error => {
+//     console.error('There has been a problem with your fetch operation:', error);
+//   });
+
+/**
+ * Try combining multiple promises
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+ */
+
+const fetchPromise1 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+);
+const fetchPromise2 = fetch(
+  "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/not-found",
+);
+const fetchPromise3 = fetch(
+  "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json",
+);
+
+Promise.all([fetchPromise1, fetchPromise2, fetchPromise3])
+  .then(responses => {
+    for (const response of responses) {
+      console.log(`${response.url}: ${response.status}`);
+    }
+  })
