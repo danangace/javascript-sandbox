@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="box">Ini Menggunakan box-sizing -> content-box</div>
+  <div class="box2">Ini Menggunakan box-sizing -> border-box</div>
+
+  <h1>Example of Margin Collapse</h1>
+  <p>Paragraph One</p>
+  <p style="margin-top: 24px;">Paragraph Two</p>
+  <span>Because of Paragraph One has margin-bottom 16px, and Paragraph Two has margin-top: 16px, the margin collapse and become 16px</span>
+  <span>And should choose the biggest margin between 2 neighbours</span>
+</body>
+<style>
+  .box {
+    box-sizing: content-box;
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    border: 2px solid red;
+  }
+
+  .box2 {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    border: 2px solid red;
+    margin-top: 20px;
+  }
+</style>
+</html>
